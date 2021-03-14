@@ -1,0 +1,26 @@
+<!-- search -->
+
+<div class="row ml-2">
+  <div class="rounded-lg d-flex col-12 col-sm-12 col-md-12 col-lg-7 col-xl-7 container">
+    <div class="  flexColumn  ">
+
+      <input class="form-control rounded pt-2 mr-3" type="file" placeholder="what do you want to do in cairo ?"
+        id="tour-search" [(ngModel)]="fileName" (change)="onFileSelected($event)">
+      <img #imgRef [src]="profileUrl | async" width="230px" height="230px" appMovement />
+
+    </div>
+
+    <div class="  flexRow  ">
+      <button class="rounded ml-2">Save</button>
+      <button class="rounded ml-2">Delete</button>
+
+      <!-- (click)="search( city , subCatName , searchTerm)" -->
+
+    </div>
+
+
+
+  </div>
+</div>
+
+<!---->

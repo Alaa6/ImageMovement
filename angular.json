@@ -127,5 +127,8 @@
       }
     }
   },
-  "defaultProject": "image-movement"
+  "defaultProject": "image-movement",
+  "cli": {
+    "analytics": "9553fc27-b569-4db4-a898-552f1738db68"
+  }
 }
