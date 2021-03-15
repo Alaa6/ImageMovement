@@ -6,13 +6,18 @@
 
       <input class="form-control rounded pt-2 mr-3" type="file" placeholder="what do you want to do in cairo ?"
         id="tour-search" [(ngModel)]="fileName" (change)="onFileSelected($event)">
-      <img #imgRef [src]="profileUrl | async" width="230px" height="230px" appMovement />
+
+        <div class="img">
+          <img #imgRef [src]="profileUrl | async"   *ngIf="profileUrl" />
+        </div>  
+
+      
 
     </div>
 
     <div class="  flexRow  ">
-      <button class="rounded ml-2">Save</button>
-      <button class="rounded ml-2">Delete</button>
+      <button class="rounded ml-2" (click)="save()">Save</button>
+      <button class="rounded ml-2" (click)="delete()">Delete</button>
 
       <!-- (click)="search( city , subCatName , searchTerm)" -->
 

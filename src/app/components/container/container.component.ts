@@ -25,8 +25,8 @@ export class ContainerComponent implements OnInit {
   
   // private scene: Scene;
   private last: MouseEvent | undefined;
+  private initEvent: MouseEvent | undefined;
   private el: HTMLElement | undefined;
-
   private mouseDown: boolean = false;
 
 
@@ -41,6 +41,11 @@ export class ContainerComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    if(this.last != undefined  ){
+      this.initEvent = this.last
+
+    }
   }
 
 
@@ -58,42 +63,60 @@ export class ContainerComponent implements OnInit {
   }
 
 
-  move(event: any, el?: any) {
+  save () {
+    if(this.last != undefined){
+      alert(`the image position in x = ${this.last.clientX} y  = ${this.last.clientY}`)
+    }
+  }
 
+  delete(){
+    if(  this.imgRef !=undefined ){
+      this.imgRef.nativeElement.style.transform = `translate(0px ,  0px )`
+            //  console.log(this.imgRef ,"img ref");
 
-
-    if (this.imgRef != undefined) {
-      const { x, y } = this.imgRef ? this.imgRef.nativeElement.getBoundingClientRect() : null
-      this.offsetLeft = this.offsetLeft + 10
-      this.offsetTop = this.offsetTop + 10
-
-      this.imgRef.nativeElement.style.transform = `translate(${this.offsetLeft}px,${this.offsetTop}px)`
-
-      console.log(x, "testx");
-      console.log(y, "testy");
-      console.log(this.imgRef.nativeElement.offsetLeft);
-      console.log(this.imgRef.nativeElement.offsetTop);
-      console.log(this.imgRef.nativeElement.keyCode);
-
-
+            // this.last.clientX = 543
+             
     }
 
-
-    // var rect = el.getBoundingClientRect();
-    // console.log(rect);
-
   }
-  getPosition(event: any) {
-    let offsetTop = 0;
-    let offsetLeft = 0;
-    let el = event.srcElement;
-    while (el) {
-      offsetLeft += el.offsetLeft;
-      offsetTop += el.offsetTop;
-      el = el.parentElement;
+
+
+
+  @HostListener('mouseup')
+  onMouseup() {
+    this.mouseDown = false;
+    console.log(this.mouseDown, "in mouseup ");
+  }
+
+  @HostListener('mousemove', ['$event'])
+  onMousemove(event: MouseEvent) {
+
+    console.log(event, "in mousemove ");
+    console.log(event.clientX, 'my x');
+    console.log(this.mouseDown, 'in mousemove');
+
+    if (this.mouseDown && this.last != undefined && this.imgRef  != undefined) {
+      let x = event.clientX - this.last.clientX;
+      let y = event.clientY - this.last.clientY;
+
+      this.imgRef.nativeElement.style.transform = `translate(${event.clientX }px , ${event.clientY }px )`
+      
+
+      this.last = event;
+      console.log(event.clientX - this.last.clientX, 'last x');
+
     }
-    return { x: offsetLeft, y: offsetTop }
   }
+
+  @HostListener('mousedown', ['$event'])
+  onMousedown(event: MouseEvent) {
+    console.log(event, 'in mousedown');
+
+    this.mouseDown = true;
+    console.log(this.mouseDown, 'in mousedown');
+    this.last = event;
+  }
+
 
 
 

@@ -21,15 +21,6 @@ export class ImageService   {
     const fileRef = this.storage.ref(filePath);
     const task = fileRef.put(file);
 
-    
-      // this.uploadPercent = task.percentageChanges();
-      // get notified when the download URL is available
-    // return  task.snapshotChanges().pipe(
-    //       finalize(() => this.downloadURL = fileRef.getDownloadURL() )
-         
-    //    )
-    //   .subscribe()'
-
 
 
     return  fileRef.getDownloadURL();

@@ -11,6 +11,7 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 import { MovementDirective } from './directives/movement.directive';
 
 
+
 var firebaseConfig = {
   apiKey: "AIzaSyB4uckNKxaG2fkNbhYj2lb_-TGcziMb7q4",
   authDomain: "peppy-flame-217301.firebaseapp.com",
@@ -25,7 +26,8 @@ var firebaseConfig = {
   declarations: [
     AppComponent ,
     ContainerComponent,
-    MovementDirective
+    MovementDirective,
+
   ],
   imports: [
     BrowserModule,
